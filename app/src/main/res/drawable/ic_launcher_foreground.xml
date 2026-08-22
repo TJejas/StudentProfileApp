@@ -1,0 +1,14 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Simple "person in a circle" glyph, kept inside the 66dp safe zone
+         used by adaptive icons. -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,34 m-14,0 a14,14 0 1,1 28,0 a14,14 0 1,1 -28,0" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M28,80 C28,63 39,54 54,54 C69,54 80,63 80,80 L80,84 L28,84 Z" />
+</vector>

@@ -1,0 +1,7 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. Compose supplies the real Material3 theme
+         (see ui/theme/Theme.kt); this manifest-level theme just sets the
+         window background before the first Compose frame draws, and
+         removes the default action bar since Compose renders its own UI. -->
+    <style name="Theme.StudentProfileApp" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>
