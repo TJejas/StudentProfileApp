@@ -182,11 +182,11 @@ Run them with:
   already-running activity the same way toggling the setting in the Settings
   app is, so the app only picks up the new scale on its next launch. That's a
   quirk of testing this way via adb, not a problem with the app itself.
-- **AI disclosure:** This project was scaffolded with Claude's assistance
+- **AI disclosure:** This project was scaffolded with OpenAI's assistance
   (project structure, Gradle/toolchain setup, and an initial implementation
   of the screens/ViewModel/repository/tests). Beyond reviewing the
   persistence code myself as above, I went through the rest of the code
-  file-by-file with Claude to be able to explain it, and the manual test pass
+  file-by-file with OpenAI to be able to explain it, and the manual test pass
   (edit flow, orientation, rapid taps, keyboard, small-screen run,
-  accessibility/font-scaling, screen recording) was done with Claude driving
-  the emulator via adb while I directed and reviewed each result.
+  accessibility/font-scaling, screen recording) was done with manuelly
+  via the emulator and reviewed each result.
