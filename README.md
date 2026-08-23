@@ -7,7 +7,7 @@ app/repo.
 
 ## Prerequisites
 
-- **Android Studio** (Ladybug/2024.2 or newer recommended) — bundles a
+- **Android Studio** (Ladybug/2024.2 or newer recommended), which bundles a
   compatible JDK, so you generally don't need to install Java separately.
 - An **Android emulator** (via Android Studio's Device Manager) or a
   **physical Android phone** with USB debugging enabled, running **Android
@@ -77,7 +77,7 @@ Navigation Compose for something this small.
 The saved profile is stored with **Jetpack DataStore (Preferences DataStore)**,
 in `ProfileRepository`. Reasoning:
 - There is exactly **one** small, flat record to persist (three fields), not
-  a collection of rows — a full database (Room/SQLite) would add
+  a collection of rows, so a full database (Room/SQLite) would add
   schema/DAO/migration machinery this task doesn't need.
 - Plain `SharedPreferences` could also work, but its API is
   synchronous/callback-based; DataStore is coroutine/`Flow`-based, safer to
@@ -101,7 +101,7 @@ The manifest does **not** suppress configuration changes (no
 Activity is destroyed and recreated the normal Android way. This works
 correctly here because all UI state (typed name, dropdown selections,
 current screen, saved profile) lives in `ProfileViewModel`, and ViewModels
-are retained across configuration changes by the Android framework — so
+are retained across configuration changes by the Android framework, so
 nothing typed into the form is lost on rotation. This was a deliberate
 choice over `configChanges` because it's the idiomatic pattern and better
 demonstrates the actual lifecycle behaviour being handled correctly, rather
@@ -118,7 +118,7 @@ the keyboard.
 
 `ProfileViewModel.saveProfile()` checks `uiState.isSaving` and ignores
 re-entrant calls while a save is already in flight, and the Save button is
-disabled (`enabled = !isSaving`) during that window — so rapid tapping
+disabled (`enabled = !isSaving`) during that window, so rapid tapping
 cannot fire multiple saves or navigate twice.
 
 ### Accessibility
@@ -138,9 +138,9 @@ See [`docs/TEST_REPORT.md`](docs/TEST_REPORT.md) for the full functional +
 non-functional test report (expected/actual/pass-fail/evidence).
 
 Automated tests included in the repo:
-- `app/src/test/.../ProfileValidationTest.kt` — JVM unit tests for the name
+- `app/src/test/.../ProfileValidationTest.kt`: JVM unit tests for the name
   validation rule (empty, whitespace-only, valid, valid-with-padding).
-- `app/src/androidTest/.../ProfileFlowTest.kt` — on-device Compose UI tests
+- `app/src/androidTest/.../ProfileFlowTest.kt`: on-device Compose UI tests
   covering the empty-name error, a valid save reaching the summary screen,
   and Edit Profile returning to the form with the saved values pre-filled.
 
@@ -154,31 +154,31 @@ Run them with:
 
 - Dark theme is implemented (`Theme.kt` follows the system's light/dark
   setting via `isSystemInDarkTheme()`) but was not manually verified during
-  testing — only light mode was checked on-device.
+  testing. Only light mode was checked on-device.
 - There's no way to delete a saved profile once created, only edit/overwrite
-  it — acceptable for this assignment's scope (a single-profile app) but
+  it, which is acceptable for this assignment's scope (a single-profile app) but
   would need addressing for a multi-profile version.
 - During testing, running `adb shell screenrecord` at the same time as
   scripted input automation reliably triggered a "isn't responding" dialog
   on the development machine (reproduced twice, recovered cleanly both
   times). This was host CPU contention between the video encoder and input
-  automation, not an app defect — it didn't occur during any other testing
+  automation, not an app defect. It didn't occur during any other testing
   (rapid taps, rotation, edit flow, small-screen run) when screen recording
   wasn't also running at the same time. See `docs/TEST_REPORT.md` for
   details.
 
 ## What I learned / where AI helped
 
-- Everything in this project was new to me — this was my first time writing
+- Everything in this project was new to me. This was my first time writing
   Kotlin, using Jetpack Compose, and building an Android app at all.
 - I personally reviewed the DataStore repository code (`ProfileRepository.kt`)
-  and worked through how the Flow-based read works — the saved profile is
+  and worked through how the Flow-based read works: the saved profile is
   exposed as a reactive stream rather than read with a one-off blocking call.
 - What tripped me up was testing the text-scaling (font size) accessibility
   behavior: changing the system font size via
   `adb shell settings put system font_scale` didn't visibly change the app's
   text until the app was force-stopped and relaunched. I had to think through
-  why — a config change applied this way isn't pushed live to an
+  why: a config change applied this way isn't pushed live to an
   already-running activity the same way toggling the setting in the Settings
   app is, so the app only picks up the new scale on its next launch. That's a
   quirk of testing this way via adb, not a problem with the app itself.
