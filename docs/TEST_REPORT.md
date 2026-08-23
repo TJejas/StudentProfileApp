@@ -1,4 +1,4 @@
-# Test Report — Student Profile App
+# Test Report - Student Profile App
 
 > Fill in the **Actual result**, **Status**, and **Notes/evidence** columns after each manual run.
 > "Device/emulator" should be a real name (e.g. "Pixel 6 API 34 emulator", "Pixel 7 physical, Android 14").
