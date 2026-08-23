@@ -152,8 +152,20 @@ Run them with:
 
 ## Known issues / limitations
 
-- _Fill in after manual testing — e.g. any small-screen layout wrapping, any
-  device-specific quirk observed._
+- Dark theme is implemented (`Theme.kt` follows the system's light/dark
+  setting via `isSystemInDarkTheme()`) but was not manually verified during
+  testing — only light mode was checked on-device.
+- There's no way to delete a saved profile once created, only edit/overwrite
+  it — acceptable for this assignment's scope (a single-profile app) but
+  would need addressing for a multi-profile version.
+- During testing, running `adb shell screenrecord` at the same time as
+  scripted input automation reliably triggered a "isn't responding" dialog
+  on the development machine (reproduced twice, recovered cleanly both
+  times). This was host CPU contention between the video encoder and input
+  automation, not an app defect — it didn't occur during any other testing
+  (rapid taps, rotation, edit flow, small-screen run) when screen recording
+  wasn't also running at the same time. See `docs/TEST_REPORT.md` for
+  details.
 
 ## What I learned / where AI helped
 
