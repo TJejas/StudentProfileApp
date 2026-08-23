@@ -169,10 +169,24 @@ Run them with:
 
 ## What I learned / where AI helped
 
-- _Fill in: what was new to you (Compose state hoisting, DataStore, Compose
-  testing, etc.), what was difficult, and how you investigated/resolved it._
+- Everything in this project was new to me — this was my first time writing
+  Kotlin, using Jetpack Compose, and building an Android app at all.
+- I personally reviewed the DataStore repository code (`ProfileRepository.kt`)
+  and worked through how the Flow-based read works — the saved profile is
+  exposed as a reactive stream rather than read with a one-off blocking call.
+- What tripped me up was testing the text-scaling (font size) accessibility
+  behavior: changing the system font size via
+  `adb shell settings put system font_scale` didn't visibly change the app's
+  text until the app was force-stopped and relaunched. I had to think through
+  why — a config change applied this way isn't pushed live to an
+  already-running activity the same way toggling the setting in the Settings
+  app is, so the app only picks up the new scale on its next launch. That's a
+  quirk of testing this way via adb, not a problem with the app itself.
 - **AI disclosure:** This project was scaffolded with Claude's assistance
   (project structure, Gradle/toolchain setup, and an initial implementation
-  of the screens/ViewModel/repository/tests). _Add your own note here about
-  which parts you changed, debugged, or extended yourself, and anything you
-  had to look up separately to understand._
+  of the screens/ViewModel/repository/tests). Beyond reviewing the
+  persistence code myself as above, I went through the rest of the code
+  file-by-file with Claude to be able to explain it, and the manual test pass
+  (edit flow, orientation, rapid taps, keyboard, small-screen run,
+  accessibility/font-scaling, screen recording) was done with Claude driving
+  the emulator via adb while I directed and reviewed each result.
